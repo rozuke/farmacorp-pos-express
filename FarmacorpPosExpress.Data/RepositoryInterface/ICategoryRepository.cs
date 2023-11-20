@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FarmacorpPosExpress.Data.Repository;
-public interface IExpProductRepository
+namespace FarmacorpPosExpress.Data.RepositoryInterface;
+public interface ICategoryRepository
 {
-    ExpProduct GetById(int id);
-    void AddExpProduct(ExpProduct expProduct);
+    Category GetById(int id);
+    void AddCategory(Category category);
 }

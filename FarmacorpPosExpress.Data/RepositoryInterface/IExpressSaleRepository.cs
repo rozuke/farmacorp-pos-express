@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FarmacorpPosExpress.Data.Repository;
+namespace FarmacorpPosExpress.Data.RepositoryInterface;
 public interface IExpressSaleRepository
 {
     ExpressSale GetById(int id);

@@ -1,4 +1,4 @@
-﻿using FarmacorpPosExpress.Data.Repository;
+﻿using FarmacorpPosExpress.Data.RepositoryInterface;
 using FarmacorpPosExpress.Models.Express;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FarmacorpPosExpress.Data;
+namespace FarmacorpPosExpress.Data.Repository;
 
 public class ProductTypeRepository : IProductTypeRepository
 {
     private DbContext _dbContext;
+
+    public ProductTypeRepository(DbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public void AddProductType(ProductType productType)
     {
         _dbContext.Set<ProductType>().Add(productType);

@@ -1,8 +1,8 @@
-﻿using FarmacorpPosExpress.Data.Repository;
+﻿using FarmacorpPosExpress.Data.RepositoryInterface;
 using FarmacorpPosExpress.Models.ERP;
 using Microsoft.EntityFrameworkCore;
 
-namespace FarmacorpPosExpress.Data;
+namespace FarmacorpPosExpress.Data.Repository;
 
 public class ErpProductRepository : IErpProductRepository
 {

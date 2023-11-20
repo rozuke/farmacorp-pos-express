@@ -1,4 +1,4 @@
-﻿using FarmacorpPosExpress.Data.Repository;
+﻿using FarmacorpPosExpress.Data.RepositoryInterface;
 using FarmacorpPosExpress.Models.ERP;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FarmacorpPosExpress.Data;
+namespace FarmacorpPosExpress.Data.Repository;
 
 public class BarCodeRepository : IBarCodeRepository
 
 {
     private DbContext _dbContext;
 
-    public BarCodeRepository (DbContext dbContext)
+    public BarCodeRepository(DbContext dbContext)
     {
         _dbContext = dbContext;
     }

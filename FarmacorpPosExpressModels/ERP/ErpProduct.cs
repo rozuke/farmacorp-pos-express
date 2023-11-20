@@ -12,6 +12,7 @@ public class ErpProduct
     public int ErpProductId { get; set; }
     public double Cost { get; set; }
     public string UniqueCode { get; set; }
+    public int Stock { get; set; }
     public DateTime RegistrationDate { get; set; }
 
     public int ExpProductId { get; set; }

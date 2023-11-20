@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace FarmacorpPosExpress.Data.Repository;
+namespace FarmacorpPosExpress.Data.RepositoryInterface;
 
 public interface IErpProductRepository
 {

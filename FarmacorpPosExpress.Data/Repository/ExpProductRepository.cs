@@ -1,4 +1,5 @@
-﻿using FarmacorpPosExpress.Models.Express;
+﻿using FarmacorpPosExpress.Data.RepositoryInterface;
+using FarmacorpPosExpress.Models.Express;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,10 @@ public class ExpProductRepository : IExpProductRepository
 {
     private DbContext _dbContext;
 
-    public ExpProductRepository (DbContext dbContext)
+    public ExpProductRepository(DbContext dbContext)
     {
         _dbContext = dbContext;
     }
-
     public void AddExpProduct(ExpProduct expProduct)
     {
         _dbContext.Set<ExpProduct>().Add(expProduct);
