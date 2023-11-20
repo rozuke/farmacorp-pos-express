@@ -1,12 +1,28 @@
-﻿using System;
+﻿using FarmacorpPosExpress.Data.Repository;
+using FarmacorpPosExpress.Models.Express;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FarmacorpPosExpress.Data
+namespace FarmacorpPosExpress.Data;
+
+public class CategoryRepository : ICategoryRepository
 {
-    internal class CategoryRepository
+    private DbContext _dbContext;
+
+    public CategoryRepository (DbContext dbContext) {
+        _dbContext = dbContext;
+    }
+    public void AddCategory(Category category)
     {
+        _dbContext.Set<Category>().Add(category);
+    }
+
+    public Category GetById(int id)
+    {
+        return _dbContext.Set<Category>().Find(id);
     }
 }
