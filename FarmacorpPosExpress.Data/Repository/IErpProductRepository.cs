@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FarmacorpPosExpress.Data.Repository;
 
-public interface IBarCode
+public interface IErpProductRepository
 {
-    BarCode GetById(int id);
-    void AddBarCode(BarCode barCode);
+    ErpProduct GetById(int id);
+    void AddErpProduct(ErpProduct product);
 }
