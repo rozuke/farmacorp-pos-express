@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace FarmacorpPosExpress.Data.RepositoryInterface;
 public interface IExpProductRepository
 {
+
+    List<ExpProduct> GetAll();
     ExpProduct GetById(int id);
     void AddExpProduct(ExpProduct expProduct);
 }

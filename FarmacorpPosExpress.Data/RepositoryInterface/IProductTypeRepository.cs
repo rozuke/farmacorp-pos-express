@@ -10,5 +10,6 @@ namespace FarmacorpPosExpress.Data.RepositoryInterface;
 public interface IProductTypeRepository
 {
     ProductType GetById(int id);
+    List<ProductType> GetAll();
     void AddProductType(ProductType productType);
 }

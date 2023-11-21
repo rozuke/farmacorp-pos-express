@@ -22,6 +22,11 @@ public class ExpProductRepository : IExpProductRepository
         _dbContext.Set<ExpProduct>().Add(expProduct);
     }
 
+    public List<ExpProduct> GetAll()
+    {
+        return _dbContext.Set<ExpProduct>().ToList(); 
+    }
+
     public ExpProduct GetById(int id)
     {
         return _dbContext.Set<ExpProduct>().Find(id);

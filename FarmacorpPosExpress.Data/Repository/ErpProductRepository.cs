@@ -23,6 +23,11 @@ public class ErpProductRepository : IErpProductRepository
         return _dbContext.Set<ErpProduct>().Find(id);
     }
 
+    public ErpProduct GetByUniqueCode(string uniqueCode)
+    {
+        return _dbContext.Set<ErpProduct>().FirstOrDefault(p => p.UniqueCode == uniqueCode);
+    }
+
     public void UptadeErpProduct(ErpProduct newProduct)
     {
         var product = GetById(newProduct.ErpProductId);

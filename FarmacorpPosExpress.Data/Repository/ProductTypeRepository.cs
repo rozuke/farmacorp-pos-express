@@ -23,6 +23,11 @@ public class ProductTypeRepository : IProductTypeRepository
         _dbContext.Set<ProductType>().Add(productType);
     }
 
+    public List<ProductType> GetAll()
+    {
+        return _dbContext.Set<ProductType>().ToList();
+    }
+
     public ProductType GetById(int id)
     {
         return _dbContext.Set<ProductType>().Find(id);

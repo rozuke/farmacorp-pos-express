@@ -56,6 +56,22 @@ namespace FarmacorpPosExpress.Data.Migrations
                         .HasFilter("[ExpProductProductId] IS NOT NULL");
 
                     b.ToTable("CodigosBarras", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            BarCodeId = 1,
+                            Active = true,
+                            ExpProductId = 1,
+                            UniqueCode = "123456"
+                        },
+                        new
+                        {
+                            BarCodeId = 2,
+                            Active = true,
+                            ExpProductId = 2,
+                            UniqueCode = "789012"
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.ERP.ErpProduct", b =>
@@ -76,7 +92,7 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 20, 17, 33, 5, 250, DateTimeKind.Local).AddTicks(9320));
+                        .HasDefaultValue(new DateTime(2023, 11, 21, 0, 7, 57, 736, DateTimeKind.Local).AddTicks(1127));
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -91,6 +107,26 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.HasIndex("ExpProductId");
 
                     b.ToTable("ErpProductos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ErpProductId = 1,
+                            Cost = 10.5,
+                            ExpProductId = 1,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 100,
+                            UniqueCode = "ERP001"
+                        },
+                        new
+                        {
+                            ErpProductId = 2,
+                            Cost = 15.75,
+                            ExpProductId = 2,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 150,
+                            UniqueCode = "ERP002"
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.Express.Category", b =>
@@ -112,14 +148,30 @@ namespace FarmacorpPosExpress.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descripcion");
 
-                    b.Property<int>("ParentCategoryId")
-                        .HasColumnType("int");
+                    b.Property<int?>("ParentCategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("IdCategoriaPadre");
 
                     b.HasKey("CategoryId");
 
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categoria", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Active = true,
+                            Description = "Categoría A"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Active = true,
+                            Description = "Categoría B",
+                            ParentCategoryId = 1
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.Express.ExpProduct", b =>
@@ -167,6 +219,28 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.HasIndex("ProductTypeId1");
 
                     b.ToTable("ExpProducto", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Active = true,
+                            ExpirationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Producto 1",
+                            Observations = "Producto bueno",
+                            Price = 20.0,
+                            ProductTypeId = 1
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Active = true,
+                            ExpirationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Producto 2",
+                            Observations = "Producto bueno",
+                            Price = 30.0,
+                            ProductTypeId = 2
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.Express.ExpressSale", b =>
@@ -220,6 +294,32 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.HasIndex("ExpProductProductId");
 
                     b.ToTable("VentaExpress", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ExpressSaleId = 1,
+                            Client = "Cliente 1",
+                            Date = new DateTime(2023, 11, 21, 0, 7, 57, 740, DateTimeKind.Local).AddTicks(1928),
+                            Discount = 0.0,
+                            ExpProductId = 1,
+                            Price = 15.0,
+                            Quantity = 5,
+                            Total = 75.0,
+                            UniqueProduct = "123456"
+                        },
+                        new
+                        {
+                            ExpressSaleId = 2,
+                            Client = "Cliente 2",
+                            Date = new DateTime(2023, 11, 21, 0, 7, 57, 740, DateTimeKind.Local).AddTicks(1934),
+                            Discount = 0.0,
+                            ExpProductId = 2,
+                            Price = 25.0,
+                            Quantity = 10,
+                            Total = 250.0,
+                            UniqueProduct = "789012"
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.Express.ProductCategory", b =>
@@ -236,7 +336,7 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 20, 17, 33, 5, 260, DateTimeKind.Local).AddTicks(8096));
+                        .HasDefaultValue(new DateTime(2023, 11, 21, 0, 7, 57, 739, DateTimeKind.Local).AddTicks(8379));
 
                     b.Property<int>("ExpProductId")
                         .HasColumnType("int");
@@ -266,6 +366,18 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.HasKey("ProductTypeId");
 
                     b.ToTable("TiposProducto", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProductTypeId = 1,
+                            Description = "Tipo 1"
+                        },
+                        new
+                        {
+                            ProductTypeId = 2,
+                            Description = "Tipo 2"
+                        });
                 });
 
             modelBuilder.Entity("FarmacorpPosExpress.Models.ERP.BarCode", b =>
@@ -299,8 +411,7 @@ namespace FarmacorpPosExpress.Data.Migrations
                     b.HasOne("FarmacorpPosExpress.Models.Express.Category", "ParentCategory")
                         .WithMany("ParentCategories")
                         .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ParentCategory");
                 });

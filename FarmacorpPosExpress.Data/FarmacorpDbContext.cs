@@ -13,6 +13,7 @@ namespace FarmacorpPosExpress.Data;
 
 public class FarmacorpDbContext : DbContext
 {
+    private string connectionString = "";
     public DbSet<BarCode> BarCodes { get; set; }
     public DbSet<ErpProduct> ErpProducts { get; set; }
     public DbSet<Category> Categories { get; set; }
@@ -54,6 +55,7 @@ public class FarmacorpDbContext : DbContext
             entity.HasKey(e => e.CategoryId);
             entity.Property(e => e.Description).HasColumnName("Descripcion");
             entity.Property(e => e.Active).HasDefaultValue(true).HasColumnName("Activo");
+            entity.Property(e => e.ParentCategoryId).HasColumnName("IdCategoriaPadre").IsRequired(false);
             entity.HasOne(e => e.ParentCategory).WithMany(e => e.ParentCategories).HasForeignKey(e => e.ParentCategoryId).OnDelete(DeleteBehavior.Restrict);
            
         });
@@ -99,21 +101,15 @@ public class FarmacorpDbContext : DbContext
             
         });
 
-
+        SeedData(modelBuilder);
 
         base.OnModelCreating(modelBuilder);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", ".."))
-            .AddJsonFile("appsettings.json")
-            .Build();
 
-        string connectionString = configuration.GetConnectionString("farmacorpPosExpressConnectionDB");
-        Console.WriteLine("esta es la conexionn !!!!!!!!!");
-        Console.WriteLine(connectionString);
+
         if(!string.IsNullOrEmpty(connectionString))
         {
             optionsBuilder.UseSqlServer(connectionString);
@@ -122,5 +118,42 @@ public class FarmacorpDbContext : DbContext
         {
             Console.WriteLine("Error en el string de conexion");
         }
+    }
+
+    private void SeedData(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<BarCode>().HasData(
+            new BarCode { BarCodeId = 1, UniqueCode = "123456", Active = true, ExpProductId = 1 },
+            new BarCode { BarCodeId = 2, UniqueCode = "789012", Active = true, ExpProductId = 2 }
+        );
+
+        modelBuilder.Entity<ExpProduct>().HasData(
+            new ExpProduct { ProductId = 1, Name = "Producto 1", Price = 20.0, Active = true, ProductTypeId = 1, Observations = "Producto bueno" },
+            new ExpProduct { ProductId = 2, Name = "Producto 2", Price = 30.0, Active = true, ProductTypeId = 2, Observations = "Producto bueno" }
+        );
+
+        modelBuilder.Entity<ErpProduct>().HasData(
+            new ErpProduct { ErpProductId = 1, Cost = 10.5, UniqueCode = "ERP001", Stock = 100, ExpProductId = 1 },
+            new ErpProduct { ErpProductId = 2, Cost = 15.75, UniqueCode = "ERP002", Stock = 150, ExpProductId = 2 }
+        );
+
+        modelBuilder.Entity<Category>().HasData(
+            new Category { CategoryId = 1, Description = "Categoría A", Active = true },
+            new Category { CategoryId = 2, Description = "Categoría B", Active = true, ParentCategoryId = 1 }
+        );
+
+
+        modelBuilder.Entity<ExpressSale>().HasData(
+            new ExpressSale { ExpressSaleId = 1, Date = DateTime.Now, Client = "Cliente 1", UniqueProduct = "123456", Quantity = 5, Price = 15.0, Discount = 0.0, Total = 75.0, ExpProductId = 1 },
+            new ExpressSale { ExpressSaleId = 2, Date = DateTime.Now, Client = "Cliente 2", UniqueProduct = "789012", Quantity = 10, Price = 25.0, Discount = 0.0, Total = 250.0, ExpProductId = 2 }
+        );
+
+        modelBuilder.Entity<ProductType>().HasData(
+        new ProductType { ProductTypeId = 1, Description = "Tipo 1" },
+        new ProductType { ProductTypeId = 2, Description = "Tipo 2" }
+);
+        modelBuilder.Entity<ProductCategory>().HasData(
+            new ProductCategory { ProductCategoryId = 1, CreationDate = DateTime.Now, ExpProductId = 1,CategoryId = 1}, 
+        new ProductCategory { ProductCategoryId = 2, CreationDate = DateTime.Now, ExpProductId = 2, CategoryId = 1 });
     }
 }

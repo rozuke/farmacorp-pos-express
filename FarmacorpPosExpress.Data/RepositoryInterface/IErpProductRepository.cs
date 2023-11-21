@@ -12,6 +12,8 @@ public interface IErpProductRepository
 {
     ErpProduct GetById(int id);
 
+    ErpProduct GetByUniqueCode(string uniqueCode);
+
     void UptadeErpProduct(ErpProduct product);
     void AddErpProduct(ErpProduct product);
 }
