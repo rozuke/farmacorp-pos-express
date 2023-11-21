@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmacorpPosExpress.ConsoleApp", "FarmacorpPosExpress\FarmacorpPosExpress.ConsoleApp.csproj", "{B42EB5EE-B436-411C-B631-3A2DDA9E77B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmacorpPosExpress.ConsoleApp", "FarmacorpPosExpress\FarmacorpPosExpress.ConsoleApp.csproj", "{B42EB5EE-B436-411C-B631-3A2DDA9E77B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmacorpPosExpress.Models", "FarmacorpPosExpressModels\FarmacorpPosExpress.Models.csproj", "{4B20CE9E-DA71-4F43-B0AC-227C86ABF858}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmacorpPosExpress.Models", "FarmacorpPosExpressModels\FarmacorpPosExpress.Models.csproj", "{4B20CE9E-DA71-4F43-B0AC-227C86ABF858}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmacorpPosExpress.Data", "FarmacorpPosExpress.Data\FarmacorpPosExpress.Data.csproj", "{F1F70513-01FD-46F6-91F0-AC76BE7D1ED1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmacorpPosExpress.Data", "FarmacorpPosExpress.Data\FarmacorpPosExpress.Data.csproj", "{F1F70513-01FD-46F6-91F0-AC76BE7D1ED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmacorpPosExpress.Business", "FarmacorpPosExpress.Business\FarmacorpPosExpress.Business.csproj", "{73D10B4E-B04F-4B51-8545-CC6C89BD4C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmacorpPosExpress.Business", "FarmacorpPosExpress.Business\FarmacorpPosExpress.Business.csproj", "{73D10B4E-B04F-4B51-8545-CC6C89BD4C9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

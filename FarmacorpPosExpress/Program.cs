@@ -123,7 +123,7 @@ public class Program
         Console.Write("Ingrese el Costo del Producto: ");
         double cost = ParseNumberToDouble();
 
-        Console.Write("Ingrese la fecha de vencimiento: ");
+        Console.Write("Ingrese la fecha de vencimiento (YYYY-MM-DD): ");
         DateTime date = ParseDateTime();
 
         Console.Write("Ingrese alguna observacion del producto: ");
@@ -177,7 +177,7 @@ public class Program
         {
             ConsoleTableBuilder.From(types).ExportAndWriteLine();
         }
-        Console.WriteLine("**************No Hay Productos Registrados**************\n");
+
     }
     private static void ShowProducts(List<ExpProduct> products)
     {
@@ -185,7 +185,7 @@ public class Program
         {
             ConsoleTableBuilder.From(products).ExportAndWriteLine();
         }
-        Console.WriteLine("**************No Hay Productos Registrados**************\n");
+
     }
 
 }
