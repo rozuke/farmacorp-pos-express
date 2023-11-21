@@ -2,6 +2,7 @@
 using FarmacorpPosExpress.Models.Express;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,15 @@ public class FarmacorpDbContext : DbContext
 {
     public DbSet<BarCode> BarCodes { get; set; }
     public DbSet<ErpProduct> ErpProducts { get; set; }
-    public DbSet<Category> CategoryProducts { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<ExpProduct> ExpProducts { get; set; }
     public DbSet<ExpressSale> ExpressSaleProducts { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<ProductType> ProductTypes { get; set; }
 
+    public FarmacorpDbContext() { }
     public FarmacorpDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,7 +54,7 @@ public class FarmacorpDbContext : DbContext
             entity.HasKey(e => e.CategoryId);
             entity.Property(e => e.Description).HasColumnName("Descripcion");
             entity.Property(e => e.Active).HasDefaultValue(true).HasColumnName("Activo");
-            entity.HasOne(e => e.ParentCategory).WithMany(e => e.ParentCategories).HasForeignKey(e => e.ParentCategoryId);
+            entity.HasOne(e => e.ParentCategory).WithMany(e => e.ParentCategories).HasForeignKey(e => e.ParentCategoryId).OnDelete(DeleteBehavior.Restrict);
            
         });
 
@@ -71,7 +74,6 @@ public class FarmacorpDbContext : DbContext
             entity.HasKey(e => e.ExpressSaleId);
             entity.Property(e => e.Date).HasColumnName("Fecha");
             entity.Property(e => e.Client).HasColumnName("Cliente");
-            entity.Property(e => e.Product).HasColumnName("Producto");
             entity.Property(e => e.UniqueProduct).HasColumnName("UniqueProducto");
             entity.Property(e => e.Quantity).HasColumnName("Cantidad");
             entity.Property(e => e.Price).HasColumnName("Precio");
@@ -83,13 +85,15 @@ public class FarmacorpDbContext : DbContext
 
         modelBuilder.Entity<ProductCategory>(entity =>
         {
+            entity.ToTable("ProductosCategorias");
             entity.HasKey(e => e.ProductCategoryId);
             entity.Property(e => e.CreationDate).HasDefaultValue(DateTime.Now);
             entity.HasOne(e => e.Product).WithMany(e => e.ProductsCategories).HasForeignKey(e => e.ExpProductId);
             entity.HasOne(e => e.Category).WithMany(e => e.ProductCategories).HasForeignKey(e => e.CategoryId);
         });
 
-        modelBuilder.Entity<ProductType>(entity => { 
+        modelBuilder.Entity<ProductType>(entity => {
+            entity.ToTable("TiposProducto");
             entity.HasKey(e => e.ProductTypeId);
             entity.Property(e => e.Description).HasColumnName("Descripcion");
             
@@ -98,5 +102,25 @@ public class FarmacorpDbContext : DbContext
 
 
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", ".."))
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        string connectionString = configuration.GetConnectionString("farmacorpPosExpressConnectionDB");
+        Console.WriteLine("esta es la conexionn !!!!!!!!!");
+        Console.WriteLine(connectionString);
+        if(!string.IsNullOrEmpty(connectionString))
+        {
+            optionsBuilder.UseSqlServer(connectionString);
+            Console.WriteLine("Conexion exitosa");
+        } else
+        {
+            Console.WriteLine("Error en el string de conexion");
+        }
     }
 }

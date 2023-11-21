@@ -9,5 +9,7 @@ namespace FarmacorpPosExpress.Data.RepositoryInterface;
 public interface ICategoryRepository
 {
     Category GetById(int id);
+
+    List<Category> GetAll();
     void AddCategory(Category category);
 }

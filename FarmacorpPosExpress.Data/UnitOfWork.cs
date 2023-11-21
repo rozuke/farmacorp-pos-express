@@ -1,16 +1,10 @@
 ﻿using FarmacorpPosExpress.Data.Repository;
 using FarmacorpPosExpress.Data.RepositoryInterface;
-using FarmacorpPosExpress.Models.ERP;
-using FarmacorpPosExpress.Models.Express;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FarmacorpPosExpress.Data;
 
-public class UnitOfWork
+public class UnitOfWork : IDisposable
 {
     private readonly FarmacorpDbContext _context;
 

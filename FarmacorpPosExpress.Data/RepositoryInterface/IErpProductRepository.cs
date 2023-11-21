@@ -11,5 +11,7 @@ namespace FarmacorpPosExpress.Data.RepositoryInterface;
 public interface IErpProductRepository
 {
     ErpProduct GetById(int id);
+
+    void UptadeErpProduct(ErpProduct product);
     void AddErpProduct(ErpProduct product);
 }

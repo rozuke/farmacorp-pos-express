@@ -22,6 +22,11 @@ public class CategoryRepository : ICategoryRepository
         _dbContext.Set<Category>().Add(category);
     }
 
+    public List<Category> GetAll()
+    {
+        return _dbContext.Set<Category>().ToList();
+    }
+
     public Category GetById(int id)
     {
         return _dbContext.Set<Category>().Find(id);
